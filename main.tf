@@ -9,8 +9,8 @@ resource "aws_vpc" "main" {
 
 # Create the subnet
 resource "aws_subnet" "public" {
-  vpc_id            = aws_vpc.main.id
-  cidr_block        = var.subnet_cidr_block
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = var.subnet_cidr_block
   map_public_ip_on_launch = true
 
   tags = {
@@ -39,4 +39,10 @@ resource "aws_route_table" "public" {
   tags = {
     Name = "flask-app-public-rt"
   }
+}
+
+# Route table association
+resource "aws_route_table_association" "as" {
+  subnet_id      = aws_subnet.public.id
+  route_table_id = aws_route_table.public.id
 }
