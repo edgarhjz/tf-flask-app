@@ -15,3 +15,21 @@ variable "subnet_cidr_block" {
   type        = string
   default     = ["10.0.1.0/24"]
 }
+
+variable "s3_bucket" {
+  description = "The name of the S3 bucket for Terraform state"
+  type        = string
+  default = "tf-bucket-project1"
+}
+
+variable "s3_key" {
+  description = "The S3 key for Terraform state"
+  type        = string
+  default     = "tf-flask-app/terraform.tfstate"
+}
+
+variable "dynamodb_table" {
+  description = "The DynamoDB table for Terraform state locking"
+  type        = string
+  default     = "tf-lock-table"
+}
