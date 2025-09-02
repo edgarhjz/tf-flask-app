@@ -1,6 +1,6 @@
 variable "aws_region" {
   description = "The AWS region to deploy the application"
-  type = string
+  type        = string
   default     = "us-east-1"
 }
 
@@ -19,5 +19,5 @@ variable "subnet_cidr_block" {
 variable "s3_bucket" {
   description = "The name of the S3 bucket for Terraform state"
   type        = string
-  default = "tf-bucket-project1"
+  default     = "tf-bucket-project1"
 }
