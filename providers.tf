@@ -7,10 +7,10 @@ terraform {
   }
 
   backend "s3" {
-    bucket         = var.s3_bucket
-    key            = var.s3_key
-    region         = var.aws_region
-    dynamodb_table = var.dynamodb_table
+    bucket         = "tf-bucket-project1"
+    key            = "tf-flask-app/terraform.tfstate"
+    region         = "us-east-1"
+    dynamodb_table = "tf-lock-table"
     encrypt        = true
   }
 }
