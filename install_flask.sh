@@ -5,6 +5,10 @@ apt-get update -y
 # Install Python 3, pip, and the venv module required for virtual environments
 apt-get install -y python3-pip python3.12-venv
 
+# Set up port forwarding from 80 to 5000
+# This allows our non-root app to be accessible on the standard HTTP port
+iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 5000
+
 # Create a directory for the Flask app
 mkdir /home/ubuntu/flaskapp
 cd /home/ubuntu/flaskapp
@@ -46,7 +50,8 @@ def hello_world():
     """
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80)
+    # Run the app on a non-privileged port (e.g., 5000)
+    app.run(host='0.0.0.0', port=5000)
 EOF
 
 # Change ownership of the app directory to the ubuntu user
