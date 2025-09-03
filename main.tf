@@ -88,6 +88,8 @@ resource "aws_instance" "web_server" {
   subnet_id              = aws_subnet.public.id
   vpc_security_group_ids = [aws_security_group.web_server_sg.id]
 
+  user_data = file("install_flask.sh")
+
   tags = {
     Name = "flask-app-server"
   }
