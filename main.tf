@@ -49,9 +49,9 @@ resource "aws_route_table_association" "as" {
 
 # Security Group
 resource "aws_security_group" "web_server_sg" {
-  name = "web_server_sg"
+  name        = "web_server_sg"
   description = "Allow HTTP and SSH inbound traffic"
-  vpc_id = aws_vpc.main.id
+  vpc_id      = aws_vpc.main.id
 
   ingress {
     from_port   = 80
@@ -80,13 +80,13 @@ resource "aws_security_group" "web_server_sg" {
 }
 
 # EC2 Instance
-resource "aws_instance" "app" {
+resource "aws_instance" "web_server" {
   ami           = var.ami_id
   instance_type = var.instance_type
   key_name      = var.key_name
 
   subnet_id              = aws_subnet.public.id
-  vpc_security_group_ids  = [aws_security_group.web_server_sg.id]
+  vpc_security_group_ids = [aws_security_group.web_server_sg.id]
 
   tags = {
     Name = "flask-app-server"
