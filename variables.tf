@@ -31,5 +31,4 @@ variable "instance_type" {
 variable "key_name" {
   description = "The name of the SSH key pair"
   type        = string
-  default     = "flask-app-key-pair"
 }
