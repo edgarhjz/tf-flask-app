@@ -16,8 +16,20 @@ variable "subnet_cidr_block" {
   default     = "10.0.1.0/24"
 }
 
-variable "s3_bucket" {
-  description = "The name of the S3 bucket for Terraform state"
+variable "ami_id" {
+  description = "The AMI ID for the EC2 instance (Ubuntu Server 24.04 LTS)"
   type        = string
-  default     = "tf-bucket-project1"
+  default     = "ami-0360c520857e3138f"
+}
+
+variable "instance_type" {
+  description = "The instance type for the EC2 instance"
+  type        = string
+  default     = "t3.micro"
+}
+
+variable "key_name" {
+  description = "The name of the SSH key pair"
+  type        = string
+  default     = "flask-app-key-pair"
 }
