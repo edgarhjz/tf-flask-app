@@ -2,17 +2,20 @@
 # Update the instance's package list
 apt-get update -y
 
-# Install Python 3 and pip
-apt-get install -y python3-pip
-
-# Install Flask
-pip3 install Flask
+# Install Python 3, pip, and the venv module required for virtual environments
+apt-get install -y python3-pip python3.12-venv
 
 # Create a directory for the Flask app
 mkdir /home/ubuntu/flaskapp
 cd /home/ubuntu/flaskapp
 
-# Create a simple Flask application file
+# Create a Python virtual environment
+python3 -m venv venv
+
+# Install Flask using the pip from the new virtual environment
+/home/ubuntu/flaskapp/venv/bin/pip install Flask
+
+# Create the Flask application file
 cat <<EOF > app.py
 from flask import Flask
 
@@ -49,5 +52,5 @@ EOF
 # Change ownership of the app directory to the ubuntu user
 chown -R ubuntu:ubuntu /home/ubuntu/flaskapp
 
-# Run the Flask app as the ubuntu user
-sudo -u ubuntu nohup python3 /home/ubuntu/flaskapp/app.py > /dev/null 2>&1 &
+# Run the Flask app using the python executable from the virtual environment
+sudo -u ubuntu /home/ubuntu/flaskapp/venv/bin/python /home/ubuntu/flaskapp/app.py > /dev/null 2>&1 &
